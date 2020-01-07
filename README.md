@@ -1,4 +1,4 @@
-### Todo Amplified
+## Todo Amplified
 
 Todo app done with React and AWS Amplify w/ owner-based authorization. [DEMO](http://todos-amplified-dev.s3-website.eu-central-1.amazonaws.com)
 
@@ -9,6 +9,8 @@ Todo app done with React and AWS Amplify w/ owner-based authorization. [DEMO](ht
 - AWS AppSync (GraphQL) for API
 - DynamoDB for persistence and real-time updates
 - AWS S3 for hosting
+
+### Features
 
 #### Private Todos
 
