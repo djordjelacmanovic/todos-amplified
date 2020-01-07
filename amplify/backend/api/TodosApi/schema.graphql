@@ -1,0 +1,24 @@
+type SharedTodo 
+  @model(subscriptions: { level: public })
+  @auth(rules: [
+    { allow: owner, operations: [create, update, delete] }
+  ])
+{
+  id: ID!
+  title: String!
+  text: String
+  owner: String
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+}
+
+type PrivateTodo 
+  @model
+  @auth(rules: [{ allow: owner }])
+{
+  id: ID!
+  title: String!
+  text: String
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+}

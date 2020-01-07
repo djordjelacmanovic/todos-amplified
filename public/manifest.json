@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Todos Amplified",
+  "name": "Todo app with AWS Amplify",
   "icons": [
     {
       "src": "favicon.ico",
