@@ -1,6 +1,6 @@
 ## Todo Amplified
 
-Todo app done with React and AWS Amplify w/ owner-based authorization. [DEMO](http://todos-amplified-dev.s3-website.eu-central-1.amazonaws.com)
+Todo app done with React and AWS Amplify w/ owner-based authorization. [DEMO](https://master.d163zvopcuzdia.amplifyapp.com)
 
 ### Stack
 
