@@ -9,6 +9,7 @@ Todo app done with React and AWS Amplify w/ owner-based authorization. [DEMO](ht
 - AWS AppSync (GraphQL) for API
 - DynamoDB for persistence and real-time updates
 - AWS S3 for hosting
+- AWS Amplify Console for CI/CD
 
 ### Features
 
