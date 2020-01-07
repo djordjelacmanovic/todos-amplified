@@ -31,7 +31,7 @@ const PrivateTodos = () => {
       })).subscribe({
         next: (eventData) => {
           const privateTodo = eventData.value.data.onCreatePrivateTodo;
-          dispatch({type: ON_CREATE, todo: privateTodo });
+          dispatch({type: ON_CREATE, todo: { ...privateTodo, isOwner: true } });
         }
       });
       deleteSubscription = API.graphql(graphqlOperation(onDeletePrivateTodo, {
