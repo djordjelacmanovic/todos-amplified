@@ -1,5 +1,7 @@
-import React from "react";
+import React from 'react';
 import moment from 'moment';
+import Linkify from 'react-linkify';
+
 import {
   Grid,
   Card,
@@ -19,7 +21,7 @@ const Todo = props => {
       <CardHeader title={props.title}/>
       <CardContent>
         <Typography variant="body2" component="p">
-          {props.text}
+          <Linkify>{props.text}</Linkify>
         </Typography>
       </CardContent>
       <CardActions>
