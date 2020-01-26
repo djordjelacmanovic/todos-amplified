@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "lib": ["dom", "esnext"],
+    "jsx": "react",
+    "target": "ES6",
+    "baseUrl": "src",
+    "paths": {
+      "utils/*": ["./utils/*"],
+      "models/*": ["./models/*"],
+      "services/*": ["./services/*"]
+    }
+  },
+  "include": ["src/**/*"]
+}

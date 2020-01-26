@@ -1,20 +1,18 @@
 import React from "react";
-import "./App.css";
 
-import PrivateTodos from "./Todo/PrivateTodos";
-import SharedTodos from "./Todo/SharedTodos";
-import Amplify from "aws-amplify";
 import API from "@aws-amplify/api";
-import PubSub from "@aws-amplify/pubsub";
-import awsconfig from "./aws-exports";
+import Auth from "@aws-amplify/auth";
+import awsConfig from "./aws-exports";
 import { withAuthenticator } from "aws-amplify-react";
-import { Paper, Typography } from "@material-ui/core";
-import { Grid } from "@material-ui/core";
-import AddNewTodo from "./Todo/AddNewTodo";
 
-Amplify.configure(awsconfig);
-API.configure(awsconfig);
-PubSub.configure(awsconfig);
+import PrivateTodos from "./app/Todo/PrivateTodos";
+import SharedTodos from "./app/Todo/SharedTodos";
+
+import { Paper, Typography, Grid } from "@material-ui/core";
+import AddNewTodo from "./app/Todo/AddNewTodo";
+
+API.configure(awsConfig);
+Auth.configure(awsConfig);
 
 const App = () => {
   return (

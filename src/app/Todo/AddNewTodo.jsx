@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { createSharedTodo, createPrivateTodo } from '../graphql/mutations';
-import API, { graphqlOperation } from '@aws-amplify/api';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import {
   Button,
@@ -21,7 +19,9 @@ import {
   Snackbar
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
-import CloseIcon from '@material-ui/icons/Close';
+import CloseIcon from "@material-ui/icons/Close";
+import { createSharedTodo } from "services/shared-todos-service";
+import { createPrivateTodo } from "services/private-todos-service";
 
 const fabStyle = {
   margin: 0,
@@ -34,12 +34,12 @@ const fabStyle = {
 
 const initialFormData = {
   isShared: false,
-  inputText: ''
-}
+  inputText: ""
+};
 
 const AddNewTodo = () => {
   const theme = useTheme();
-  const fullScreenDialog = useMediaQuery(theme.breakpoints.down('sm'));
+  const fullScreenDialog = useMediaQuery(theme.breakpoints.down("sm"));
   const [open, setOpen] = useState(false);
   const [isSnackOpen, setSnackIsOpen] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
@@ -55,10 +55,13 @@ const AddNewTodo = () => {
   };
   const resetFormData = () => setFormData(initialFormData);
   const handleAdd = () => {
-    const [title, ...rest] = formData.inputText.split('\n');
-    const text = rest.length > 0 ? rest.filter(line => line && line !== '').join('\n') : null;
+    const [title, ...rest] = formData.inputText.split("\n");
+    const text =
+      rest.length > 0
+        ? rest.filter(line => line && line !== "").join("\n")
+        : null;
     const todo = { title, text };
-    if(formData.isShared){
+    if (formData.isShared) {
       createNewSharedTodo(todo, snackOpen);
       resetFormData();
       close();
@@ -68,8 +71,10 @@ const AddNewTodo = () => {
       close();
     }
   };
-  const handleCheckboxChange = event => setFormData({...formData, isShared: event.target.checked });
-  const handleInputChange = event => setFormData({...formData, inputText: event.target.value });
+  const handleCheckboxChange = event =>
+    setFormData({ ...formData, isShared: event.target.checked });
+  const handleInputChange = event =>
+    setFormData({ ...formData, inputText: event.target.value });
 
   return (
     <>
@@ -81,7 +86,14 @@ const AddNewTodo = () => {
       >
         <AddIcon />
       </Fab>
-      <Dialog maxWidth="md" fullWidth={true} fullScreen={fullScreenDialog} open={open} onClose={close} aria-labelledby="form-dialog-title">
+      <Dialog
+        maxWidth="md"
+        fullWidth={true}
+        fullScreen={fullScreenDialog}
+        open={open}
+        onClose={close}
+        aria-labelledby="form-dialog-title"
+      >
         <DialogTitle id="form-dialog-title">Add a new Todo</DialogTitle>
         <DialogContent>
           <FormGroup>
@@ -120,35 +132,38 @@ const AddNewTodo = () => {
       </Dialog>
       <Snackbar
         anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
+          vertical: "bottom",
+          horizontal: "left"
         }}
         open={isSnackOpen}
         autoHideDuration={5000}
         onClose={snackClose}
-        message={`Added a new ${formData.isShared ? 'shared' : 'private'} todo`}
+        message={`Added a new ${formData.isShared ? "shared" : "private"} todo`}
         action={
-          <React.Fragment>
-            <IconButton size="small" aria-label="close" color="inherit" onClick={snackClose}>
+          <>
+            <IconButton
+              size="small"
+              aria-label="close"
+              color="inherit"
+              onClick={snackClose}
+            >
               <CloseIcon fontSize="small" />
             </IconButton>
-          </React.Fragment>
+          </>
         }
       />
     </>
   );
 };
 
-async function createNewSharedTodo({ title, text }, snackOpen) {
-  const todo = { title, text };
-  await API.graphql(graphqlOperation(createSharedTodo, { input: todo }));
-  if(snackOpen) snackOpen();
+async function createNewSharedTodo(todo, snackOpen) {
+  await createSharedTodo(todo);
+  snackOpen && snackOpen();
 }
 
-async function createNewPrivateTodo({ title, text }, snackOpen) {
-  const todo = { title, text };
-  await API.graphql(graphqlOperation(createPrivateTodo, { input: todo }));
-  if(snackOpen) snackOpen();
+async function createNewPrivateTodo(todo, snackOpen) {
+  await createPrivateTodo(todo);
+  snackOpen && snackOpen();
 }
 
 export default AddNewTodo;

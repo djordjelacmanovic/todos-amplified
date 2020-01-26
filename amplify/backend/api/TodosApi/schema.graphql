@@ -1,6 +1,6 @@
-type SharedTodo 
-  @model(subscriptions: { level: public })
+type SharedTodo
   @auth(rules: [
+    { allow: private, operations: [get, list ] },
     { allow: owner, operations: [create, update, delete] }
   ])
 {

@@ -1,6 +1,6 @@
-import React from 'react';
-import moment from 'moment';
-import Linkify from 'react-linkify';
+import React from "react";
+import moment from "moment";
+import Linkify from "react-linkify";
 
 import {
   Grid,
@@ -11,14 +11,14 @@ import {
   Button,
   Typography
 } from "@material-ui/core";
-import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
+import DeleteForeverOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined";
 
 const Todo = props => {
   const date = moment(props.createdAt).fromNow();
   const onDelete = () => props.onDelete(props.id);
   return (
     <Card id={`todo-${props.id}`} variant="outlined">
-      <CardHeader title={props.title}/>
+      <CardHeader title={props.title} />
       <CardContent>
         <Typography variant="body2" component="p">
           <Linkify>{props.text}</Linkify>
@@ -29,11 +29,20 @@ const Todo = props => {
           container
           direction="row"
           justify="space-between"
-          alignItems="center">
+          alignItems="center"
+        >
           <Typography color="textSecondary">
-            <i>{date.toLocaleString()}</i> - <strong>{props.isOwner ? "you" : props.owner }</strong>
+            <i>{date.toLocaleString()}</i> -{" "}
+            <strong>{props.isOwner ? "you" : props.owner}</strong>
           </Typography>
-          <Button onClick={onDelete} size="small" color="secondary" disabled={!props.isOwner}><DeleteForeverOutlinedIcon/></Button>
+          <Button
+            onClick={onDelete}
+            size="small"
+            color="secondary"
+            disabled={!props.isOwner}
+          >
+            <DeleteForeverOutlinedIcon />
+          </Button>
         </Grid>
       </CardActions>
     </Card>
